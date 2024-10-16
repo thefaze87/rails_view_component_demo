@@ -1,0 +1,725 @@
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::InternalMetadata Create (0.1ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('environment', 'development', '2024-10-16 14:02:03.018059', '2024-10-16 14:02:03.018060') RETURNING "key"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to DeviseCreateUsers (20241016140048)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (2.4ms)[0m  [1m[35mCREATE TABLE "users" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "email" varchar DEFAULT '' NOT NULL, "encrypted_password" varchar DEFAULT '' NOT NULL, "reset_password_token" varchar, "reset_password_sent_at" datetime(6), "remember_created_at" datetime(6), "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_reset_password_token" ON "users" ("reset_password_token")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20241016140048') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+Migrating to AddNameToUsers (20241016140141)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "users" ADD "first_name" varchar[0m
+  [1m[35m (0.0ms)[0m  [1m[35mALTER TABLE "users" ADD "last_name" varchar[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20241016140141') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started GET "/" for ::1 at 2024-10-16 10:15:35 -0400
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  
+ActiveRecord::PendingMigrationError (
+
+Migrations are pending. To resolve this issue, run:
+
+        bin/rails db:migrate
+
+You have 1 pending migration:
+
+db/migrate/20241016141326_create_posts.rb
+
+
+):
+  
+activerecord (7.2.1.1) lib/active_record/migration.rb:756:in `check_pending_migrations'
+activerecord (7.2.1.1) lib/active_record/migration.rb:663:in `block (2 levels) in call'
+activesupport (7.2.1.1) lib/active_support/file_update_checker.rb:85:in `execute'
+activerecord (7.2.1.1) lib/active_record/migration.rb:668:in `block in call'
+activerecord (7.2.1.1) lib/active_record/migration.rb:660:in `synchronize'
+activerecord (7.2.1.1) lib/active_record/migration.rb:660:in `call'
+actionpack (7.2.1.1) lib/action_dispatch/middleware/callbacks.rb:31:in `block in call'
+activesupport (7.2.1.1) lib/active_support/callbacks.rb:101:in `run_callbacks'
+actionpack (7.2.1.1) lib/action_dispatch/middleware/callbacks.rb:30:in `call'
+actionpack (7.2.1.1) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (7.2.1.1) lib/action_dispatch/middleware/actionable_exceptions.rb:18:in `call'
+actionpack (7.2.1.1) lib/action_dispatch/middleware/debug_exceptions.rb:31:in `call'
+web-console (4.2.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.2.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (7.2.1.1) lib/action_dispatch/middleware/show_exceptions.rb:32:in `call'
+railties (7.2.1.1) lib/rails/rack/logger.rb:41:in `call_app'
+railties (7.2.1.1) lib/rails/rack/logger.rb:29:in `call'
+sprockets-rails (3.5.2) lib/sprockets/rails/quiet_assets.rb:17:in `call'
+actionpack (7.2.1.1) lib/action_dispatch/middleware/remote_ip.rb:96:in `call'
+actionpack (7.2.1.1) lib/action_dispatch/middleware/request_id.rb:33:in `call'
+rack (3.1.8) lib/rack/method_override.rb:28:in `call'
+rack (3.1.8) lib/rack/runtime.rb:24:in `call'
+activesupport (7.2.1.1) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (7.2.1.1) lib/action_dispatch/middleware/server_timing.rb:61:in `block in call'
+actionpack (7.2.1.1) lib/action_dispatch/middleware/server_timing.rb:26:in `collect_events'
+actionpack (7.2.1.1) lib/action_dispatch/middleware/server_timing.rb:60:in `call'
+actionpack (7.2.1.1) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (7.2.1.1) lib/action_dispatch/middleware/static.rb:27:in `call'
+rack (3.1.8) lib/rack/sendfile.rb:114:in `call'
+actionpack (7.2.1.1) lib/action_dispatch/middleware/host_authorization.rb:143:in `call'
+railties (7.2.1.1) lib/rails/engine.rb:535:in `call'
+puma (6.4.3) lib/puma/configuration.rb:272:in `call'
+puma (6.4.3) lib/puma/request.rb:100:in `block in handle_request'
+puma (6.4.3) lib/puma/thread_pool.rb:378:in `with_force_shutdown'
+puma (6.4.3) lib/puma/request.rb:99:in `handle_request'
+puma (6.4.3) lib/puma/server.rb:464:in `process_client'
+puma (6.4.3) lib/puma/server.rb:245:in `block in run'
+puma (6.4.3) lib/puma/thread_pool.rb:155:in `block in spawn_thread'
+Started GET "/" for ::1 at 2024-10-16 10:15:35 -0400
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  
+ActiveRecord::PendingMigrationError (
+
+Migrations are pending. To resolve this issue, run:
+
+        bin/rails db:migrate
+
+You have 1 pending migration:
+
+db/migrate/20241016141326_create_posts.rb
+
+
+):
+  
+activerecord (7.2.1.1) lib/active_record/migration.rb:756:in `check_pending_migrations'
+activerecord (7.2.1.1) lib/active_record/migration.rb:663:in `block (2 levels) in call'
+activesupport (7.2.1.1) lib/active_support/file_update_checker.rb:85:in `execute'
+activerecord (7.2.1.1) lib/active_record/migration.rb:668:in `block in call'
+activerecord (7.2.1.1) lib/active_record/migration.rb:660:in `synchronize'
+activerecord (7.2.1.1) lib/active_record/migration.rb:660:in `call'
+actionpack (7.2.1.1) lib/action_dispatch/middleware/callbacks.rb:31:in `block in call'
+activesupport (7.2.1.1) lib/active_support/callbacks.rb:101:in `run_callbacks'
+actionpack (7.2.1.1) lib/action_dispatch/middleware/callbacks.rb:30:in `call'
+actionpack (7.2.1.1) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (7.2.1.1) lib/action_dispatch/middleware/actionable_exceptions.rb:18:in `call'
+actionpack (7.2.1.1) lib/action_dispatch/middleware/debug_exceptions.rb:31:in `call'
+web-console (4.2.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.2.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (7.2.1.1) lib/action_dispatch/middleware/show_exceptions.rb:32:in `call'
+railties (7.2.1.1) lib/rails/rack/logger.rb:41:in `call_app'
+railties (7.2.1.1) lib/rails/rack/logger.rb:29:in `call'
+sprockets-rails (3.5.2) lib/sprockets/rails/quiet_assets.rb:17:in `call'
+actionpack (7.2.1.1) lib/action_dispatch/middleware/remote_ip.rb:96:in `call'
+actionpack (7.2.1.1) lib/action_dispatch/middleware/request_id.rb:33:in `call'
+rack (3.1.8) lib/rack/method_override.rb:28:in `call'
+rack (3.1.8) lib/rack/runtime.rb:24:in `call'
+activesupport (7.2.1.1) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (7.2.1.1) lib/action_dispatch/middleware/server_timing.rb:61:in `block in call'
+actionpack (7.2.1.1) lib/action_dispatch/middleware/server_timing.rb:26:in `collect_events'
+actionpack (7.2.1.1) lib/action_dispatch/middleware/server_timing.rb:60:in `call'
+actionpack (7.2.1.1) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (7.2.1.1) lib/action_dispatch/middleware/static.rb:27:in `call'
+rack (3.1.8) lib/rack/sendfile.rb:114:in `call'
+actionpack (7.2.1.1) lib/action_dispatch/middleware/host_authorization.rb:143:in `call'
+railties (7.2.1.1) lib/rails/engine.rb:535:in `call'
+puma (6.4.3) lib/puma/configuration.rb:272:in `call'
+puma (6.4.3) lib/puma/request.rb:100:in `block in handle_request'
+puma (6.4.3) lib/puma/thread_pool.rb:378:in `with_force_shutdown'
+puma (6.4.3) lib/puma/request.rb:99:in `handle_request'
+puma (6.4.3) lib/puma/server.rb:464:in `process_client'
+puma (6.4.3) lib/puma/server.rb:245:in `block in run'
+puma (6.4.3) lib/puma/thread_pool.rb:155:in `block in spawn_thread'
+Started GET "/favicon.ico" for ::1 at 2024-10-16 10:15:36 -0400
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  
+ActiveRecord::PendingMigrationError (
+
+Migrations are pending. To resolve this issue, run:
+
+        bin/rails db:migrate
+
+You have 1 pending migration:
+
+db/migrate/20241016141326_create_posts.rb
+
+
+):
+  
+activerecord (7.2.1.1) lib/active_record/migration.rb:756:in `check_pending_migrations'
+activerecord (7.2.1.1) lib/active_record/migration.rb:663:in `block (2 levels) in call'
+activesupport (7.2.1.1) lib/active_support/file_update_checker.rb:85:in `execute'
+activerecord (7.2.1.1) lib/active_record/migration.rb:668:in `block in call'
+activerecord (7.2.1.1) lib/active_record/migration.rb:660:in `synchronize'
+activerecord (7.2.1.1) lib/active_record/migration.rb:660:in `call'
+actionpack (7.2.1.1) lib/action_dispatch/middleware/callbacks.rb:31:in `block in call'
+activesupport (7.2.1.1) lib/active_support/callbacks.rb:101:in `run_callbacks'
+actionpack (7.2.1.1) lib/action_dispatch/middleware/callbacks.rb:30:in `call'
+actionpack (7.2.1.1) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (7.2.1.1) lib/action_dispatch/middleware/actionable_exceptions.rb:18:in `call'
+actionpack (7.2.1.1) lib/action_dispatch/middleware/debug_exceptions.rb:31:in `call'
+web-console (4.2.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.2.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (7.2.1.1) lib/action_dispatch/middleware/show_exceptions.rb:32:in `call'
+railties (7.2.1.1) lib/rails/rack/logger.rb:41:in `call_app'
+railties (7.2.1.1) lib/rails/rack/logger.rb:29:in `call'
+sprockets-rails (3.5.2) lib/sprockets/rails/quiet_assets.rb:17:in `call'
+actionpack (7.2.1.1) lib/action_dispatch/middleware/remote_ip.rb:96:in `call'
+actionpack (7.2.1.1) lib/action_dispatch/middleware/request_id.rb:33:in `call'
+rack (3.1.8) lib/rack/method_override.rb:28:in `call'
+rack (3.1.8) lib/rack/runtime.rb:24:in `call'
+activesupport (7.2.1.1) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (7.2.1.1) lib/action_dispatch/middleware/server_timing.rb:61:in `block in call'
+actionpack (7.2.1.1) lib/action_dispatch/middleware/server_timing.rb:26:in `collect_events'
+actionpack (7.2.1.1) lib/action_dispatch/middleware/server_timing.rb:60:in `call'
+actionpack (7.2.1.1) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (7.2.1.1) lib/action_dispatch/middleware/static.rb:27:in `call'
+rack (3.1.8) lib/rack/sendfile.rb:114:in `call'
+actionpack (7.2.1.1) lib/action_dispatch/middleware/host_authorization.rb:143:in `call'
+railties (7.2.1.1) lib/rails/engine.rb:535:in `call'
+puma (6.4.3) lib/puma/configuration.rb:272:in `call'
+puma (6.4.3) lib/puma/request.rb:100:in `block in handle_request'
+puma (6.4.3) lib/puma/thread_pool.rb:378:in `with_force_shutdown'
+puma (6.4.3) lib/puma/request.rb:99:in `handle_request'
+puma (6.4.3) lib/puma/server.rb:464:in `process_client'
+puma (6.4.3) lib/puma/server.rb:245:in `block in run'
+puma (6.4.3) lib/puma/thread_pool.rb:155:in `block in spawn_thread'
+Started GET "/" for ::1 at 2024-10-16 10:15:37 -0400
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  
+ActiveRecord::PendingMigrationError (
+
+Migrations are pending. To resolve this issue, run:
+
+        bin/rails db:migrate
+
+You have 1 pending migration:
+
+db/migrate/20241016141326_create_posts.rb
+
+
+):
+  
+activerecord (7.2.1.1) lib/active_record/migration.rb:756:in `check_pending_migrations'
+activerecord (7.2.1.1) lib/active_record/migration.rb:663:in `block (2 levels) in call'
+activesupport (7.2.1.1) lib/active_support/file_update_checker.rb:85:in `execute'
+activerecord (7.2.1.1) lib/active_record/migration.rb:668:in `block in call'
+activerecord (7.2.1.1) lib/active_record/migration.rb:660:in `synchronize'
+activerecord (7.2.1.1) lib/active_record/migration.rb:660:in `call'
+actionpack (7.2.1.1) lib/action_dispatch/middleware/callbacks.rb:31:in `block in call'
+activesupport (7.2.1.1) lib/active_support/callbacks.rb:101:in `run_callbacks'
+actionpack (7.2.1.1) lib/action_dispatch/middleware/callbacks.rb:30:in `call'
+actionpack (7.2.1.1) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (7.2.1.1) lib/action_dispatch/middleware/actionable_exceptions.rb:18:in `call'
+actionpack (7.2.1.1) lib/action_dispatch/middleware/debug_exceptions.rb:31:in `call'
+web-console (4.2.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.2.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (7.2.1.1) lib/action_dispatch/middleware/show_exceptions.rb:32:in `call'
+railties (7.2.1.1) lib/rails/rack/logger.rb:41:in `call_app'
+railties (7.2.1.1) lib/rails/rack/logger.rb:29:in `call'
+sprockets-rails (3.5.2) lib/sprockets/rails/quiet_assets.rb:17:in `call'
+actionpack (7.2.1.1) lib/action_dispatch/middleware/remote_ip.rb:96:in `call'
+actionpack (7.2.1.1) lib/action_dispatch/middleware/request_id.rb:33:in `call'
+rack (3.1.8) lib/rack/method_override.rb:28:in `call'
+rack (3.1.8) lib/rack/runtime.rb:24:in `call'
+activesupport (7.2.1.1) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (7.2.1.1) lib/action_dispatch/middleware/server_timing.rb:61:in `block in call'
+actionpack (7.2.1.1) lib/action_dispatch/middleware/server_timing.rb:26:in `collect_events'
+actionpack (7.2.1.1) lib/action_dispatch/middleware/server_timing.rb:60:in `call'
+actionpack (7.2.1.1) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (7.2.1.1) lib/action_dispatch/middleware/static.rb:27:in `call'
+rack (3.1.8) lib/rack/sendfile.rb:114:in `call'
+actionpack (7.2.1.1) lib/action_dispatch/middleware/host_authorization.rb:143:in `call'
+railties (7.2.1.1) lib/rails/engine.rb:535:in `call'
+puma (6.4.3) lib/puma/configuration.rb:272:in `call'
+puma (6.4.3) lib/puma/request.rb:100:in `block in handle_request'
+puma (6.4.3) lib/puma/thread_pool.rb:378:in `with_force_shutdown'
+puma (6.4.3) lib/puma/request.rb:99:in `handle_request'
+puma (6.4.3) lib/puma/server.rb:464:in `process_client'
+puma (6.4.3) lib/puma/server.rb:245:in `block in run'
+puma (6.4.3) lib/puma/thread_pool.rb:155:in `block in spawn_thread'
+Started GET "/favicon.ico" for ::1 at 2024-10-16 10:15:37 -0400
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  
+ActiveRecord::PendingMigrationError (
+
+Migrations are pending. To resolve this issue, run:
+
+        bin/rails db:migrate
+
+You have 1 pending migration:
+
+db/migrate/20241016141326_create_posts.rb
+
+
+):
+  
+activerecord (7.2.1.1) lib/active_record/migration.rb:756:in `check_pending_migrations'
+activerecord (7.2.1.1) lib/active_record/migration.rb:663:in `block (2 levels) in call'
+activesupport (7.2.1.1) lib/active_support/file_update_checker.rb:85:in `execute'
+activerecord (7.2.1.1) lib/active_record/migration.rb:668:in `block in call'
+activerecord (7.2.1.1) lib/active_record/migration.rb:660:in `synchronize'
+activerecord (7.2.1.1) lib/active_record/migration.rb:660:in `call'
+actionpack (7.2.1.1) lib/action_dispatch/middleware/callbacks.rb:31:in `block in call'
+activesupport (7.2.1.1) lib/active_support/callbacks.rb:101:in `run_callbacks'
+actionpack (7.2.1.1) lib/action_dispatch/middleware/callbacks.rb:30:in `call'
+actionpack (7.2.1.1) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (7.2.1.1) lib/action_dispatch/middleware/actionable_exceptions.rb:18:in `call'
+actionpack (7.2.1.1) lib/action_dispatch/middleware/debug_exceptions.rb:31:in `call'
+web-console (4.2.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.2.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (7.2.1.1) lib/action_dispatch/middleware/show_exceptions.rb:32:in `call'
+railties (7.2.1.1) lib/rails/rack/logger.rb:41:in `call_app'
+railties (7.2.1.1) lib/rails/rack/logger.rb:29:in `call'
+sprockets-rails (3.5.2) lib/sprockets/rails/quiet_assets.rb:17:in `call'
+actionpack (7.2.1.1) lib/action_dispatch/middleware/remote_ip.rb:96:in `call'
+actionpack (7.2.1.1) lib/action_dispatch/middleware/request_id.rb:33:in `call'
+rack (3.1.8) lib/rack/method_override.rb:28:in `call'
+rack (3.1.8) lib/rack/runtime.rb:24:in `call'
+activesupport (7.2.1.1) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (7.2.1.1) lib/action_dispatch/middleware/server_timing.rb:61:in `block in call'
+actionpack (7.2.1.1) lib/action_dispatch/middleware/server_timing.rb:26:in `collect_events'
+actionpack (7.2.1.1) lib/action_dispatch/middleware/server_timing.rb:60:in `call'
+actionpack (7.2.1.1) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (7.2.1.1) lib/action_dispatch/middleware/static.rb:27:in `call'
+rack (3.1.8) lib/rack/sendfile.rb:114:in `call'
+actionpack (7.2.1.1) lib/action_dispatch/middleware/host_authorization.rb:143:in `call'
+railties (7.2.1.1) lib/rails/engine.rb:535:in `call'
+puma (6.4.3) lib/puma/configuration.rb:272:in `call'
+puma (6.4.3) lib/puma/request.rb:100:in `block in handle_request'
+puma (6.4.3) lib/puma/thread_pool.rb:378:in `with_force_shutdown'
+puma (6.4.3) lib/puma/request.rb:99:in `handle_request'
+puma (6.4.3) lib/puma/server.rb:464:in `process_client'
+puma (6.4.3) lib/puma/server.rb:245:in `block in run'
+puma (6.4.3) lib/puma/thread_pool.rb:155:in `block in spawn_thread'
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreatePosts (20241016141326)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (1.4ms)[0m  [1m[35mCREATE TABLE "posts" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "title" varchar, "content" text, "user_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_5b5ddfd518"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_posts_on_user_id" ON "posts" ("user_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20241016141326') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started GET "/" for ::1 at 2024-10-16 10:15:57 -0400
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  
+NoMethodError (undefined method `devise_controller?' for class ApplicationController):
+  
+app/controllers/application_controller.rb:4:in `<class:ApplicationController>'
+app/controllers/application_controller.rb:1:in `<main>'
+app/controllers/posts_controller.rb:1:in `<main>'
+Started GET "/favicon.ico" for ::1 at 2024-10-16 10:15:58 -0400
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started GET "/" for ::1 at 2024-10-16 10:15:59 -0400
+  
+NoMethodError (undefined method `devise_controller?' for class ApplicationController):
+  
+app/controllers/application_controller.rb:4:in `<class:ApplicationController>'
+app/controllers/application_controller.rb:1:in `<main>'
+app/controllers/posts_controller.rb:1:in `<main>'
+Started GET "/" for ::1 at 2024-10-16 10:17:07 -0400
+Processing by PostsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering posts/index.html.erb within layouts/application
+  [1m[36mPost Load (1.0ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  ↳ app/views/posts/index.html.erb:8
+  Rendered posts/index.html.erb within layouts/application (Duration: 1.9ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 84.0ms | GC: 15.6ms)
+Completed 500 Internal Server Error in 112ms (ActiveRecord: 1.1ms (1 query, 0 cached) | GC: 18.7ms)
+
+
+  
+ActionView::Template::Error (The asset "application.js" is not present in the asset pipeline.
+):
+
+Causes:
+Sprockets::Rails::Helper::AssetNotFound (The asset "application.js" is not present in the asset pipeline.
+)
+    14:     <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    15:     <link rel="apple-touch-icon" href="/icon.png">
+    16:     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    17:     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
+    18:   </head>
+    19: 
+    20:   <body>
+  
+app/views/layouts/application.html.erb:17
+Started GET "/" for ::1 at 2024-10-16 10:17:47 -0400
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by PostsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering posts/index.html.erb within layouts/application
+  [1m[36mPost Load (0.6ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  ↳ app/views/posts/index.html.erb:8
+  Rendered posts/index.html.erb within layouts/application (Duration: 3.3ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 38.9ms | GC: 23.1ms)
+Completed 500 Internal Server Error in 64ms (ActiveRecord: 0.7ms (1 query, 0 cached) | GC: 31.8ms)
+
+
+  
+ActionView::Template::Error (The asset "application.js" is not present in the asset pipeline.
+):
+
+Causes:
+Sprockets::Rails::Helper::AssetNotFound (The asset "application.js" is not present in the asset pipeline.
+)
+    14:     <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    15:     <link rel="apple-touch-icon" href="/icon.png">
+    16:     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    17:     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
+    18:   </head>
+    19: 
+    20:   <body>
+  
+app/views/layouts/application.html.erb:17
+Started GET "/" for ::1 at 2024-10-16 10:18:40 -0400
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by PostsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering posts/index.html.erb within layouts/application
+  [1m[36mPost Load (0.6ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  ↳ app/views/posts/index.html.erb:8
+  Rendered posts/index.html.erb within layouts/application (Duration: 2.8ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 46.7ms | GC: 23.4ms)
+Completed 500 Internal Server Error in 70ms (ActiveRecord: 0.6ms (1 query, 0 cached) | GC: 31.9ms)
+
+
+  
+ActionView::Template::Error (The asset "application.js" is not present in the asset pipeline.
+):
+
+Causes:
+Sprockets::Rails::Helper::AssetNotFound (The asset "application.js" is not present in the asset pipeline.
+)
+    14:     <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    15:     <link rel="apple-touch-icon" href="/icon.png">
+    16:     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    17:     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
+    18:   </head>
+    19: 
+    20:   <body>
+  
+app/views/layouts/application.html.erb:17
+Started GET "/" for ::1 at 2024-10-16 10:18:42 -0400
+Processing by PostsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering posts/index.html.erb within layouts/application
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  ↳ app/views/posts/index.html.erb:8
+  Rendered posts/index.html.erb within layouts/application (Duration: 2.5ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 7.0ms | GC: 0.6ms)
+Completed 500 Internal Server Error in 9ms (ActiveRecord: 0.1ms (1 query, 0 cached) | GC: 0.6ms)
+
+
+  
+ActionView::Template::Error (The asset "application.js" is not present in the asset pipeline.
+):
+
+Causes:
+Sprockets::Rails::Helper::AssetNotFound (The asset "application.js" is not present in the asset pipeline.
+)
+    14:     <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    15:     <link rel="apple-touch-icon" href="/icon.png">
+    16:     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    17:     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
+    18:   </head>
+    19: 
+    20:   <body>
+  
+app/views/layouts/application.html.erb:17
+Started GET "/" for ::1 at 2024-10-16 10:18:42 -0400
+Processing by PostsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering posts/index.html.erb within layouts/application
+  [1m[36mPost Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  ↳ app/views/posts/index.html.erb:8
+  Rendered posts/index.html.erb within layouts/application (Duration: 1.5ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 4.0ms | GC: 0.0ms)
+Completed 500 Internal Server Error in 5ms (ActiveRecord: 0.1ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+  
+ActionView::Template::Error (The asset "application.js" is not present in the asset pipeline.
+):
+
+Causes:
+Sprockets::Rails::Helper::AssetNotFound (The asset "application.js" is not present in the asset pipeline.
+)
+    14:     <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    15:     <link rel="apple-touch-icon" href="/icon.png">
+    16:     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    17:     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
+    18:   </head>
+    19: 
+    20:   <body>
+  
+app/views/layouts/application.html.erb:17
+Started GET "/" for ::1 at 2024-10-16 10:18:43 -0400
+Processing by PostsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering posts/index.html.erb within layouts/application
+  [1m[36mPost Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  ↳ app/views/posts/index.html.erb:8
+  Rendered posts/index.html.erb within layouts/application (Duration: 1.0ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 3.6ms | GC: 1.2ms)
+Completed 500 Internal Server Error in 4ms (ActiveRecord: 0.1ms (1 query, 0 cached) | GC: 1.2ms)
+
+
+  
+ActionView::Template::Error (The asset "application.js" is not present in the asset pipeline.
+):
+
+Causes:
+Sprockets::Rails::Helper::AssetNotFound (The asset "application.js" is not present in the asset pipeline.
+)
+    14:     <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    15:     <link rel="apple-touch-icon" href="/icon.png">
+    16:     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    17:     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
+    18:   </head>
+    19: 
+    20:   <body>
+  
+app/views/layouts/application.html.erb:17
+Started GET "/" for ::1 at 2024-10-16 10:18:43 -0400
+Processing by PostsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering posts/index.html.erb within layouts/application
+  [1m[36mPost Load (0.0ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  ↳ app/views/posts/index.html.erb:8
+  Rendered posts/index.html.erb within layouts/application (Duration: 0.5ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 1.5ms | GC: 0.2ms)
+Completed 500 Internal Server Error in 2ms (ActiveRecord: 0.0ms (1 query, 0 cached) | GC: 0.2ms)
+
+
+  
+ActionView::Template::Error (The asset "application.js" is not present in the asset pipeline.
+):
+
+Causes:
+Sprockets::Rails::Helper::AssetNotFound (The asset "application.js" is not present in the asset pipeline.
+)
+    14:     <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    15:     <link rel="apple-touch-icon" href="/icon.png">
+    16:     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    17:     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
+    18:   </head>
+    19: 
+    20:   <body>
+  
+app/views/layouts/application.html.erb:17
+Started GET "/" for ::1 at 2024-10-16 10:18:43 -0400
+Processing by PostsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering posts/index.html.erb within layouts/application
+  [1m[36mPost Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  ↳ app/views/posts/index.html.erb:8
+  Rendered posts/index.html.erb within layouts/application (Duration: 1.8ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 5.8ms | GC: 0.0ms)
+Completed 500 Internal Server Error in 7ms (ActiveRecord: 0.1ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+  
+ActionView::Template::Error (The asset "application.js" is not present in the asset pipeline.
+):
+
+Causes:
+Sprockets::Rails::Helper::AssetNotFound (The asset "application.js" is not present in the asset pipeline.
+)
+    14:     <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    15:     <link rel="apple-touch-icon" href="/icon.png">
+    16:     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    17:     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
+    18:   </head>
+    19: 
+    20:   <body>
+  
+app/views/layouts/application.html.erb:17
+Started GET "/" for ::1 at 2024-10-16 10:18:44 -0400
+Processing by PostsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering posts/index.html.erb within layouts/application
+  [1m[36mPost Load (0.0ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  ↳ app/views/posts/index.html.erb:8
+  Rendered posts/index.html.erb within layouts/application (Duration: 1.5ms | GC: 0.8ms)
+  Rendered layout layouts/application.html.erb (Duration: 2.7ms | GC: 0.8ms)
+Completed 500 Internal Server Error in 4ms (ActiveRecord: 0.0ms (1 query, 0 cached) | GC: 0.8ms)
+
+
+  
+ActionView::Template::Error (The asset "application.js" is not present in the asset pipeline.
+):
+
+Causes:
+Sprockets::Rails::Helper::AssetNotFound (The asset "application.js" is not present in the asset pipeline.
+)
+    14:     <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    15:     <link rel="apple-touch-icon" href="/icon.png">
+    16:     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    17:     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
+    18:   </head>
+    19: 
+    20:   <body>
+  
+app/views/layouts/application.html.erb:17
+Started GET "/favicon.ico" for ::1 at 2024-10-16 10:18:44 -0400
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started GET "/" for ::1 at 2024-10-16 10:20:01 -0400
+Processing by PostsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering posts/index.html.erb within layouts/application
+  [1m[36mPost Load (0.5ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  ↳ app/views/posts/index.html.erb:8
+  Rendered posts/index.html.erb within layouts/application (Duration: 1.5ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 3.3ms | GC: 0.0ms)
+Completed 200 OK in 6ms (Views: 3.5ms | ActiveRecord: 0.5ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+  
+ActionController::RoutingError (No route matches [GET] "/assets/application.js"):
+  
+Started GET "/manifest.json" for ::1 at 2024-10-16 10:20:02 -0400
+Processing by Rails::PwaController#manifest as JSON
+  Rendering pwa/manifest.json.erb
+  Rendered pwa/manifest.json.erb (Duration: 0.1ms | GC: 0.0ms)
+Completed 200 OK in 1ms (Views: 0.6ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/" for ::1 at 2024-10-16 10:20:02 -0400
+Processing by PostsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering posts/index.html.erb within layouts/application
+  [1m[36mPost Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  ↳ app/views/posts/index.html.erb:8
+  Rendered posts/index.html.erb within layouts/application (Duration: 1.8ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 3.9ms | GC: 0.0ms)
+Completed 200 OK in 5ms (Views: 4.4ms | ActiveRecord: 0.1ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+  
+ActionController::RoutingError (No route matches [GET] "/assets/application.js"):
+  
+Started GET "/manifest.json" for ::1 at 2024-10-16 10:20:02 -0400
+Processing by Rails::PwaController#manifest as JSON
+  Rendering pwa/manifest.json.erb
+  Rendered pwa/manifest.json.erb (Duration: 0.1ms | GC: 0.0ms)
+Completed 200 OK in 0ms (Views: 0.3ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/users/sign_up" for ::1 at 2024-10-16 10:20:04 -0400
+Processing by Devise::RegistrationsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered devise/shared/_error_messages.html.erb (Duration: 0.3ms | GC: 0.0ms)
+  Rendered devise/shared/_links.html.erb (Duration: 0.6ms | GC: 0.0ms)
+  Rendered devise/registrations/new.html.erb within layouts/application (Duration: 11.7ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 13.1ms | GC: 0.0ms)
+Completed 200 OK in 28ms (Views: 15.5ms | ActiveRecord: 0.6ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+  
+ActionController::RoutingError (No route matches [GET] "/assets/application.js"):
+  
+Started GET "/manifest.json" for ::1 at 2024-10-16 10:20:05 -0400
+Processing by Rails::PwaController#manifest as JSON
+  Rendering pwa/manifest.json.erb
+  Rendered pwa/manifest.json.erb (Duration: 0.0ms | GC: 0.0ms)
+Completed 200 OK in 0ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/" for ::1 at 2024-10-16 10:20:05 -0400
+Processing by PostsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering posts/index.html.erb within layouts/application
+  [1m[36mPost Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  ↳ app/views/posts/index.html.erb:8
+  Rendered posts/index.html.erb within layouts/application (Duration: 2.1ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 5.4ms | GC: 0.7ms)
+Completed 200 OK in 7ms (Views: 5.8ms | ActiveRecord: 0.1ms (1 query, 0 cached) | GC: 0.7ms)
+
+
+  
+ActionController::RoutingError (No route matches [GET] "/assets/application.js"):
+  
+Started GET "/manifest.json" for ::1 at 2024-10-16 10:20:06 -0400
+Processing by Rails::PwaController#manifest as JSON
+  Rendering pwa/manifest.json.erb
+  Rendered pwa/manifest.json.erb (Duration: 0.1ms | GC: 0.0ms)
+Completed 200 OK in 1ms (Views: 0.4ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/posts/new" for ::1 at 2024-10-16 10:20:07 -0400
+Processing by PostsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering posts/new.html.erb within layouts/application
+  Rendered posts/_form.html.erb (Duration: 4.2ms | GC: 0.0ms)
+  Rendered posts/new.html.erb within layouts/application (Duration: 5.5ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 7.2ms | GC: 0.0ms)
+Completed 200 OK in 14ms (Views: 7.7ms | ActiveRecord: 0.5ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+  
+ActionController::RoutingError (No route matches [GET] "/assets/application.js"):
+  
+Started GET "/manifest.json" for ::1 at 2024-10-16 10:20:07 -0400
+Processing by Rails::PwaController#manifest as JSON
+  Rendering pwa/manifest.json.erb
+  Rendered pwa/manifest.json.erb (Duration: 0.1ms | GC: 0.0ms)
+Completed 200 OK in 1ms (Views: 0.3ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/users/sign_up" for ::1 at 2024-10-16 10:20:08 -0400
+Processing by Devise::RegistrationsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered devise/shared/_error_messages.html.erb (Duration: 0.0ms | GC: 0.0ms)
+  Rendered devise/shared/_links.html.erb (Duration: 0.1ms | GC: 0.0ms)
+  Rendered devise/registrations/new.html.erb within layouts/application (Duration: 2.3ms | GC: 0.1ms)
+  Rendered layout layouts/application.html.erb (Duration: 4.4ms | GC: 0.1ms)
+Completed 200 OK in 6ms (Views: 4.9ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.1ms)
+
+
+  
+ActionController::RoutingError (No route matches [GET] "/assets/application.js"):
+  
+Started GET "/manifest.json" for ::1 at 2024-10-16 10:20:08 -0400
+Processing by Rails::PwaController#manifest as JSON
+  Rendering pwa/manifest.json.erb
+  Rendered pwa/manifest.json.erb (Duration: 0.1ms | GC: 0.0ms)
+Completed 200 OK in 0ms (Views: 0.3ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/" for ::1 at 2024-10-16 10:20:09 -0400
+Processing by PostsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering posts/index.html.erb within layouts/application
+  [1m[36mPost Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  ↳ app/views/posts/index.html.erb:8
+  Rendered posts/index.html.erb within layouts/application (Duration: 2.3ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 4.3ms | GC: 0.0ms)
+Completed 200 OK in 5ms (Views: 4.7ms | ActiveRecord: 0.1ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+  
+ActionController::RoutingError (No route matches [GET] "/assets/application.js"):
+  
+Started GET "/manifest.json" for ::1 at 2024-10-16 10:20:09 -0400
+Processing by Rails::PwaController#manifest as JSON
+  Rendering pwa/manifest.json.erb
+  Rendered pwa/manifest.json.erb (Duration: 0.1ms | GC: 0.0ms)
+Completed 200 OK in 1ms (Views: 0.4ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
